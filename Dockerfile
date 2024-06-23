@@ -7,8 +7,9 @@ RUN apt-get update \
     && mkdir /var/run/sshd \
     && chmod 640 /root/.ssh \
     && chmod 600 /root/.ssh/authorized_keys \
-    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed -i "s/#Port 22/Port 2225/" /etc/ssh/sshd_config
 
-EXPOSE 22
+EXPOSE 2225
 
 CMD ["/usr/sbin/sshd", "-D"]
